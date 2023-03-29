@@ -149,6 +149,10 @@ function renderCell(location, cellContent) {
 
     // Select the elCell and set the value
     const elCell = document.querySelector(`.cell-${location.i}-${location.j}`)
+
+    if (elCell.classList.contains('cell-clicked')) return
+
     elCell.innerHTML = cellContent
+    gGame.shownCount++
 
 }

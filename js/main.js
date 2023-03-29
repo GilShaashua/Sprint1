@@ -44,6 +44,7 @@ function onCellClicked(elCell, row, col) {
         elCell.innerText = gBoard[row][col].minesAroundCount
         gBoard[row][col].isShown = true
         gGame.shownCount++
+        elCell.classList.add('cell-clicked')
 
     } else if (!gBoard[row][col].minesAroundCount) {
 
@@ -64,15 +65,19 @@ function expandShown(board, row, col) {
 
             if (board[i][j].isMine) continue
 
-            var cellLocation = { i, j }
-
             var cellContent = board[i][j].minesAroundCount
 
             board[i][j].isShown = true
 
-            gGame.shownCount++
+            var elCell = document.querySelector(`.cell-${i}-${j}`)
 
-            renderCell(cellLocation, cellContent)
+            if (elCell.classList.contains('cell-clicked')) continue
+
+            elCell.classList.add('cell-clicked')
+
+            elCell.innerHTML = cellContent
+
+            gGame.shownCount++
 
         }
     }
@@ -95,6 +100,8 @@ function checkGameOver() {
                 gGame.shownCount++
 
                 const elMineCell = document.querySelector(`.cell-${i}-${j}`)
+
+                elMineCell.classList.add('cell-clicked')
 
                 elMineCell.innerHTML = `<img src="mine.png" alt="mine">`
 
