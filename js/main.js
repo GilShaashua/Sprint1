@@ -3,7 +3,7 @@
 
 var gBoard
 
-var gLevel = { SIZE: 4, MINES: 2 }
+var gLevel = { SIZE: 12, MINES: 32 }
 
 var gGame = {
 
@@ -159,7 +159,7 @@ function insertMinesAndNegsCount(row, col) {
     for (var i = 0; i < gLevel.MINES; i++) {
 
         var randIndexI = getRandomInt(0, gBoard.length)
-        var randIndexJ = getRandomInt(0, gBoard[i].length)
+        var randIndexJ = getRandomInt(0, gBoard[0].length)
 
         gBoard[randIndexI][randIndexJ].isMine = true
 
