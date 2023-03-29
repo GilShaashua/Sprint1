@@ -3,7 +3,7 @@
 
 var gBoard
 
-var gLevel = { SIZE: 4, MINES: 2 }
+var gLevel = { SIZE: 4, MINES: 3 }
 
 var gGame = {
 
@@ -17,7 +17,8 @@ var gGame = {
 
 function onInit() {
 
-    gBoard = buildBoard(gLevel.SIZE, gLevel.SIZE)
+    gBoard = buildBoard(gLevel.SIZE, gLevel.SIZE, gLevel.MINES)
+    gGame.isOn = true
     console.log(gBoard)
 
     renderBoard(gBoard, '.container')
@@ -33,6 +34,7 @@ function onCellClicked(elCell, row, col) {
     } else if (gBoard[row][col].minesAroundCount) {
 
         elCell.innerText = gBoard[row][col].minesAroundCount
+        gBoard[row][col].isShown = true
 
     } else if (!gBoard[row][col].minesAroundCount) {
 
@@ -51,9 +53,13 @@ function expandShown(board, row, col) {
 
             if (j < 0 || j > board[i].length - 1) continue
 
+            if (board[i][j].isMine) continue
+
             var cellLocation = { i, j }
 
             var cellContent = board[i][j].minesAroundCount
+
+            board[i][j].isShown = true
 
             renderCell(cellLocation, cellContent)
 
@@ -73,6 +79,8 @@ function checkGameOver() {
 
             if (currCell.isMine) {
 
+                gBoard[i][j].isShown = true
+
                 const elMineCell = document.querySelector(`.cell-${i}-${j}`)
 
                 elMineCell.innerHTML = `<img src="mine.png" alt="mine">`
@@ -91,3 +99,8 @@ function restartGame() {
 
 }
 
+function onCellMarked(elCell) {
+
+
+
+}
