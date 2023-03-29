@@ -28,45 +28,66 @@ function onCellClicked(elCell, row, col) {
 
     if (gBoard[row][col].isMine) {
 
-        for (var i = 0; i < gBoard.length; i++) {
+        checkGameOver()
 
-            for (var j = 0; j < gBoard[i].length; j++) {
+    } else if (gBoard[row][col].minesAroundCount) {
 
-                var currCell = gBoard[i][j]
+        elCell.innerText = gBoard[row][col].minesAroundCount
 
-                if (currCell.isMine) {
+    } else if (!gBoard[row][col].minesAroundCount) {
 
-                    const elMineCell = document.querySelector(`.cell-${i}-${j}`)
-
-                    elMineCell.innerHTML = `<img src="mine.png" alt="mine">`
-
-                }
-            }
-        }
-
-    } else if (gBoard[row][col].minesAroundCount) elCell.innerText = gBoard[row][col].minesAroundCount
-
-    else if (!gBoard[row][col].minesAroundCount) {
-
-        for (var i = row - 1; i <= row + 1; i++) {
-
-            if (i < 0 || i > gBoard.length - 1) continue
-
-            for (var j = col - 1; j <= col + 1; j++) {
-
-                if (j < 0 || j > gBoard[i].length - 1 || (i === row && j === col)) continue
-
-                var cellLocation = { i, j }
-
-                var cellContent = gBoard[i][j].minesAroundCount
-
-                renderCell(cellLocation, cellContent)
-
-            }
-        }
+        expandShown(gBoard, row, col)
 
     }
 }
 
+function expandShown(board, row, col) {
 
+    for (var i = row - 1; i <= row + 1; i++) {
+
+        if (i < 0 || i > board.length - 1) continue
+
+        for (var j = col - 1; j <= col + 1; j++) {
+
+            if (j < 0 || j > board[i].length - 1) continue
+
+            var cellLocation = { i, j }
+
+            var cellContent = board[i][j].minesAroundCount
+
+            renderCell(cellLocation, cellContent)
+
+        }
+    }
+
+}
+
+// need to implement sad face to restart the game
+function checkGameOver() {
+
+    for (var i = 0; i < gBoard.length; i++) {
+
+        for (var j = 0; j < gBoard[i].length; j++) {
+
+            var currCell = gBoard[i][j]
+
+            if (currCell.isMine) {
+
+                const elMineCell = document.querySelector(`.cell-${i}-${j}`)
+
+                elMineCell.innerHTML = `<img src="mine.png" alt="mine">`
+
+            }
+        }
+    }
+
+    restartGame()
+
+}
+
+function restartGame() {
+
+
+
+}
 
