@@ -1,0 +1,31 @@
+* {
+    box-sizing: content-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+}
+
+img {
+    width: 30px;
+}
+
+.board {
+    margin: auto;
+    /* text-align: center; */
+    border-collapse: collapse;
+}
+
+.cell {
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    font-size: 1.5em;
+    border: 1px solid black;
+    text-align: center;
+}
+
+.cellclicked {
+    display: none;
+}
