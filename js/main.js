@@ -3,7 +3,7 @@
 
 var gBoard
 
-var gLevel = { SIZE: 4, MINES: 3 }
+var gLevel = { SIZE: 4, MINES: 2 }
 
 var gGame = {
 
@@ -13,6 +13,8 @@ var gGame = {
     secsPassed: 0
 
 }
+
+
 
 
 function onInit() {
@@ -27,7 +29,13 @@ function onInit() {
 
 function onCellClicked(elCell, row, col) {
 
+    if (!gGame.isOn) return
+
+    if (gBoard[row][col].isMarked) return
+
     if (gBoard[row][col].isMine) {
+
+        gGame.isOn = false
 
         checkGameOver()
 
@@ -35,6 +43,7 @@ function onCellClicked(elCell, row, col) {
 
         elCell.innerText = gBoard[row][col].minesAroundCount
         gBoard[row][col].isShown = true
+        gGame.shownCount++
 
     } else if (!gBoard[row][col].minesAroundCount) {
 
@@ -61,6 +70,8 @@ function expandShown(board, row, col) {
 
             board[i][j].isShown = true
 
+            gGame.shownCount++
+
             renderCell(cellLocation, cellContent)
 
         }
@@ -81,6 +92,8 @@ function checkGameOver() {
 
                 gBoard[i][j].isShown = true
 
+                gGame.shownCount++
+
                 const elMineCell = document.querySelector(`.cell-${i}-${j}`)
 
                 elMineCell.innerHTML = `<img src="mine.png" alt="mine">`
@@ -99,8 +112,27 @@ function restartGame() {
 
 }
 
-function onCellMarked(elCell) {
+function onCellMarked(elCell, event, i, j) {
+
+    event.preventDefault()
+
+    if (!gGame.isOn) return
+
+    if (gBoard[i][j].isShown) return
 
 
+    if (gBoard[i][j].isMarked) {
+
+        gBoard[i][j].isMarked = false
+        gGame.markedCount--
+        elCell.innerText = ''
+
+    } else {
+
+        gBoard[i][j].isMarked = true
+        gGame.markedCount++
+        elCell.innerHTML = `<img src="mark.png" alt="flag mark" style="height:28px;width:auto">`
+
+    }
 
 }

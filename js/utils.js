@@ -129,7 +129,9 @@ function renderBoard(mat, selector) {
 
             const className = `cell cell-${i}-${j}`
 
-            strHTML += `<td onclick="onCellClicked(this,${i},${j})" class="${className}"> </td>`
+            strHTML += `<td onclick="onCellClicked(this,${i},${j})" 
+                        oncontextmenu="onCellMarked(this, event, ${i},${j})" 
+                        class="${className}"> </td>`
         }
 
         strHTML += '</tr>'
