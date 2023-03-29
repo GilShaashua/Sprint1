@@ -4,7 +4,7 @@
 /*********************/
 /*Create*/
 /*********************/
-function buildBoard(rows, cols, mines) {
+function buildBoard(rows, cols) {
 
     const mat = []
 
@@ -26,30 +26,6 @@ function buildBoard(rows, cols, mines) {
         }
 
         mat.push(row)
-    }
-
-    for (var i = 0; i < mines; i++) {
-
-        var randIndexI = getRandomInt(0, mat.length)
-        var randIndexJ = getRandomInt(0, mat[i].length)
-
-        mat[randIndexI][randIndexJ].isMine = true
-
-    }
-
-    var count = 0
-
-    for (var i = 0; i < mat.length; i++) {
-
-        for (var j = 0; j < mat[i].length; j++) {
-
-            const currCell = mat[i][j]
-
-            count = setMinesNegsCount(mat, i, j)
-
-            currCell.minesAroundCount = count
-        }
-
     }
 
     return mat
@@ -117,7 +93,7 @@ function getRandomColor() {
 /*Render*/
 /*******************************/
 
-function renderBoard(mat, selector) {
+function renderBoard(mat, selector, mines) {
 
     var strHTML = '<table class="board"><tbody>'
 
@@ -145,14 +121,14 @@ function renderBoard(mat, selector) {
 }
 
 // location is an object like this - { i: 2, j: 7 }
-function renderCell(location, cellContent) {
+// function renderCell(location, cellContent) {
 
-    // Select the elCell and set the value
-    const elCell = document.querySelector(`.cell-${location.i}-${location.j}`)
+//     // Select the elCell and set the value
+//     const elCell = document.querySelector(`.cell-${location.i}-${location.j}`)
 
-    if (elCell.classList.contains('cell-clicked')) return
+//     if (elCell.classList.contains('cell-clicked')) return
 
-    elCell.innerHTML = cellContent
-    gGame.shownCount++
+//     elCell.innerHTML = cellContent
+//     gGame.shownCount++
 
-}
+// }
