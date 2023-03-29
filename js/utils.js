@@ -32,11 +32,16 @@ function buildBoard(rows, cols) {
     var count = 0
 
     for (var i = 0; i < mat.length; i++) {
+
         for (var j = 0; j < mat[i].length; j++) {
+
             const currCell = mat[i][j]
+
             count = setMinesNegsCount(mat, i, j)
+
             currCell.minesAroundCount = count
         }
+
     }
 
     return mat
@@ -59,16 +64,16 @@ function setMinesNegsCount(board, row, col) {
     return amount
 }
 
-function getAmountOfCellsContaining(BOARD, ITEM) {
-    var amount = 0
-    for (var i = 0; i < BOARD.length; i++) {
-        for (var j = 0; j < BOARD[i].length; j++) {
-            if (BOARD[i][j] === ITEM) amount++
-        }
-    }
-    if (!amount) amount = ''
-    return amount
-}
+// function getAmountOfCellsContaining(BOARD, ITEM) {
+//     var amount = 0
+//     for (var i = 0; i < BOARD.length; i++) {
+//         for (var j = 0; j < BOARD[i].length; j++) {
+//             if (BOARD[i][j] === ITEM) amount++
+//         }
+//     }
+//     if (!amount) amount = ''
+//     return amount
+// }
 
 /*******************************/
 /*Random*/
@@ -89,22 +94,22 @@ function getRandomColor() {
     return color
 }
 
-function getRandomOrderNumbersArray(MAX) {
-    const nums = getArrayWithAscNums(MAX)
-    var res = []
-    for (var i = 0; i < MAX; i++) {
-        res[i] = drawNum(nums)
-    }
-    return res
-}
+// function getRandomOrderNumbersArray(MAX) {
+//     const nums = getArrayWithAscNums(MAX)
+//     var res = []
+//     for (var i = 0; i < MAX; i++) {
+//         res[i] = drawNum(nums)
+//     }
+//     return res
+// }
 
-function getArrayWithAscNums(MAX) {
-    var numbers = []
-    for (var i = 0; i < MAX; i++) {
-        numbers[i] = i + 1
-    }
-    return numbers
-}
+// function getArrayWithAscNums(MAX) {
+//     var numbers = []
+//     for (var i = 0; i < MAX; i++) {
+//         numbers[i] = i + 1
+//     }
+//     return numbers
+// }
 
 /*******************************/
 /*Render*/
@@ -141,36 +146,35 @@ function renderBoard(mat, selector) {
 
 }
 
-function renderBoardByObjProperty(mat, selector, property) {
-    var strHTML = '<table><tbody>'
-    for (var i = 0; i < mat.length; i++) {
-        strHTML += '<tr>'
-        for (var j = 0; j < mat[0].length; j++) {
-            const cell = mat[i][j][property]
-            const className = `cell cell-${i}-${j}`
+// function renderBoardByObjProperty(mat, selector, property) {
+//     var strHTML = '<table><tbody>'
+//     for (var i = 0; i < mat.length; i++) {
+//         strHTML += '<tr>'
+//         for (var j = 0; j < mat[0].length; j++) {
+//             const cell = mat[i][j][property]
+//             const className = `cell cell-${i}-${j}`
 
-            strHTML += `<td class="${className}">${cell}</td>`
-        }
-        strHTML += '</tr>'
-    }
-    strHTML += '</tbody></table>'
+//             strHTML += `<td class="${className}">${cell}</td>`
+//         }
+//         strHTML += '</tr>'
+//     }
+//     strHTML += '</tbody></table>'
 
-    const elContainer = document.querySelector(selector)
-    elContainer.innerHTML = strHTML
-}
+//     const elContainer = document.querySelector(selector)
+//     elContainer.innerHTML = strHTML
+// }
 
 // location is an object like this - { i: 2, j: 7 }
 function renderCell(location, cellContent) {
     // Select the elCell and set the value
     const elCell = document.querySelector(`.cell-${location.i}-${location.j}`)
-    if (cellContent === `<img src="mine.png" alt="mine">`) return
-
     elCell.innerHTML = cellContent
+
 }
 /*******************************/
 /*Misc*/
 /*******************************/
 
-function drawNum(NUMS) {
-    return NUMS.splice(getRandomInt(0, NUMS.length), 1)[0]
-}
+// function drawNum(NUMS) {
+//     return NUMS.splice(getRandomInt(0, NUMS.length), 1)[0]
+// }

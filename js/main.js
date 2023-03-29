@@ -26,28 +26,45 @@ function onInit() {
 
 function onCellClicked(elCell, row, col) {
 
-    if (!elCell.innerText) {
-        elCell.innerHTML = `<img src="mine.png" alt="mine">`
-    }
+    if (gBoard[row][col].isMine) {
 
+        for (var i = 0; i < gBoard.length; i++) {
 
-    for (var i = row - 1; i <= row + 1; i++) {
+            for (var j = 0; j < gBoard[i].length; j++) {
 
-        if (i < 0 || i > gBoard.length - 1) continue
+                var currCell = gBoard[i][j]
 
-        for (var j = col - 1; j <= col + 1; j++) {
+                if (currCell.isMine) {
 
-            if (j < 0 || j > gBoard[i].length - 1) continue
+                    const elMineCell = document.querySelector(`.cell-${i}-${j}`)
 
-            var cellLocation = { i, j }
+                    elMineCell.innerHTML = `<img src="mine.png" alt="mine">`
 
-            var cellContent
-            if (gBoard[i][j].isMine) cellContent = `<img src="mine.png" alt="mine">`
-            else cellContent = gBoard[i][j].minesAroundCount
-
-            renderCell(cellLocation, cellContent)
-
+                }
+            }
         }
+
+    } else if (gBoard[row][col].minesAroundCount) elCell.innerText = gBoard[row][col].minesAroundCount
+
+    else if (!gBoard[row][col].minesAroundCount) {
+
+        for (var i = row - 1; i <= row + 1; i++) {
+
+            if (i < 0 || i > gBoard.length - 1) continue
+
+            for (var j = col - 1; j <= col + 1; j++) {
+
+                if (j < 0 || j > gBoard[i].length - 1 || (i === row && j === col)) continue
+
+                var cellLocation = { i, j }
+
+                var cellContent = gBoard[i][j].minesAroundCount
+
+                renderCell(cellLocation, cellContent)
+
+            }
+        }
+
     }
 }
 
