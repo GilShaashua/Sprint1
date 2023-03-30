@@ -93,7 +93,7 @@ function getRandomColor() {
 /*Render*/
 /*******************************/
 
-function renderBoard(mat, selector, mines) {
+function renderBoard(mat, selector) {
 
     var strHTML = '<table class="board"><tbody>'
 
@@ -105,7 +105,7 @@ function renderBoard(mat, selector, mines) {
 
             const className = `cell cell-${i}-${j}`
 
-            strHTML += `<td onclick="onCellClicked(this,${i},${j})" 
+            strHTML += `<td onclick="onCellClicked(this,${i},${j}), onStartWatch()" 
                         oncontextmenu="onCellMarked(this, event, ${i},${j})" 
                         class="${className}"> </td>`
         }

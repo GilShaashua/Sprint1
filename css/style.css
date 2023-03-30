@@ -8,9 +8,10 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    background-color: #fff1a3;
 }
 
-.container {
+.board {
     flex: 1;
 }
 
@@ -18,11 +19,19 @@ img {
     width: 30px;
 }
 
+.main-board {
+    margin: auto;
+    padding: 20px;
+    background-color: #3869c5;
+    height: fit-content;
+    text-align: center;
+}
+
 .board {
     margin: auto;
-    margin-top: 200px;
-    /* text-align: center; */
     border-collapse: collapse;
+    margin-bottom: 5px;
+    margin-top: 5px;
 }
 
 .cell {
@@ -39,9 +48,56 @@ img {
     background-color: #dfdfdf;
 }
 
+.levels {
+    margin-bottom: 20px;
+}
+
+.levels button {
+    padding: 10px;
+    border-style: none;
+    cursor: pointer;
+    margin: 2px;
+}
+
+.levels button:hover {
+    background-color: #e2e2e2;
+}
+
+.smiley-lives-stopwatch-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.stop-watch {
+    margin-bottom: 20px;
+    margin-left: 15px;
+    flex: 1;
+    background-color: #ffffff69;
+}
+
+.lives {
+    margin-bottom: 20px;
+    margin-left: 15px;
+    flex: 2;
+    background-color: #ffffff69;
+}
+
+.smiley {
+    margin-bottom: 20px;
+    border-style: none;
+    cursor: pointer;
+    padding: 5px;
+    text-align: center;
+    flex: 1;
+    max-width: 40px;
+}
+
+.smiley:hover {
+    background-color: #e2e2e2;
+}
+
 footer {
     background-color: #d8d8d8;
-    padding: 20px;
+    padding: 40px;
     text-align: center;
-    height: 40px;
 }
